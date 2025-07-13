@@ -1,7 +1,41 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Header from './Header';
+import { validate } from '../utils/validate';
+import { auth } from '../utils/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(true);
+
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const handleButtonClick = () => {
+    const message = validate(email.current.value, password.current.value);
+    setErrorMessage(message);
+    if (message) return;
+
+    if (!isSignInForm) {
+      // sign up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          setErrorMessage(errorCode + '-' + errorMessage);
+        });
+    } else {
+      //sing in logic
+    }
+  };
   const toggleSignInform = () => {
     setIsSignInForm(!isSignInForm);
   };
@@ -15,7 +49,10 @@ const Login = () => {
         />
       </div>
       <div className="relative z-10 flex justify-center items-center min-h-screen">
-        <form className="bg-black/50 p-8 rounded-md text-white w-[90%] max-w-md ">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="bg-black/50 p-8 rounded-md text-white w-[90%] max-w-md "
+        >
           <h2 className="text-2xl font-bold mb-4">
             {isSignInForm
               ? 'Lights, Camera, Login!'
@@ -29,16 +66,24 @@ const Login = () => {
             />
           )}
           <input
+            ref={email}
             type="text"
             placeholder="Ready to binge? Type your email"
             className="p-4 m-4 w-full bg-gray-800 text-white rounded-lg"
           />
           <input
+            ref={password}
             type="password"
             placeholder="......."
             className="p-4 m-4 w-full bg-gray-800 text-white rounded-lg"
           />
-          <button className="p-4 m-4 w-full bg-red-600 hover:bg-red-700 rounded">
+          <p className="text-red-700 font-bold text-lg p-2 ml-2">
+            {errorMessage}
+          </p>
+          <button
+            onClick={handleButtonClick}
+            className="p-4 m-4 w-full bg-red-600 hover:bg-red-700 rounded"
+          >
             {isSignInForm ? 'Sign In' : 'Sign Up'}
           </button>
 

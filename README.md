@@ -33,3 +33,5 @@ implement signin with user api
 create redux store with userslice
 implement signout
 update profile
+
+bugfix - if the user is not logged in redirect /browse to login page and vice-versa

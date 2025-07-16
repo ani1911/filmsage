@@ -4,19 +4,36 @@ import logout from '../assets/logout.png';
 import { auth } from '../utils/firebase';
 import { signOut } from 'firebase/auth';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { addUser, removeUser } from '../utils/userSlice';
 
 const Header = () => {
   const user = useSelector((store) => store.user);
-  const Navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        Navigate('/');
-      })
+      .then(() => {})
       .catch((error) => {
-        Navigate('/error');
+        navigate('/error');
       });
   };
+  useEffect(() => {
+   const unsubscribe =  onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = user;
+        dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+        navigate('/browse');
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        navigate('/');
+      }
+    });
+    return () => unsubscribe();
+  }, []);
   return (
     <div className="fixed top-0 left-0 z-10 w-full px-4 md:px-8 py-3 bg-gradient-to-b from-black/90 via-black/50 to-transparent flex items-center justify-between">
       <img
@@ -24,14 +41,16 @@ const Header = () => {
         src={logo}
         alt="logo"
       />
-      {user && (<div className="flex">
-        <img
-          className="w-8 h-8 cursor-pointer hover:opacity-70 hover:scale-110"
-          src={logout}
-          alt="logout-icon"
-          onClick={handleSignOut}
-        />
-      </div>)}
+      {user && (
+        <div className="flex">
+          <img
+            className="w-8 h-8 cursor-pointer hover:opacity-70 hover:scale-110"
+            src={logout}
+            alt="logout-icon"
+            onClick={handleSignOut}
+          />
+        </div>
+      )}
     </div>
   );
 };

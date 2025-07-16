@@ -2,7 +2,10 @@ import { useState, useRef } from 'react';
 import Header from './Header';
 import { validate } from '../utils/validate';
 import { auth } from '../utils/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(true);
@@ -30,10 +33,25 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
 
-          setErrorMessage(errorCode + '-' + errorMessage);
+          setErrorMessage(errorMessage);
         });
     } else {
       //sing in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + '-' + errorMessage);
+        });
     }
   };
   const toggleSignInform = () => {
@@ -82,7 +100,7 @@ const Login = () => {
           </p>
           <button
             onClick={handleButtonClick}
-            className="p-4 m-4 w-full bg-red-600 hover:bg-red-700 rounded"
+            className="p-4 m-4 w-full bg-red-600 hover:bg-red-700 rounded hover:scale-105"
           >
             {isSignInForm ? 'Sign In' : 'Sign Up'}
           </button>

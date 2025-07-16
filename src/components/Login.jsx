@@ -6,10 +6,16 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
+import background from '../assets/background.jpg';
+import { useNavigate } from 'react-router-dom';
+import { updateProfile } from 'firebase/auth';
+
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(true);
+  const Navigate = useNavigate();
 
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -25,15 +31,17 @@ const Login = () => {
         email.current.value,
         password.current.value
       )
-        .then((userCredential) => {
+        .then(async (userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+
+          await updateProfile(user, {
+            displayName: name.current.value,
+          });
+
+          Navigate('/browse');
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          setErrorMessage(errorMessage);
+          setErrorMessage(error.message);
         });
     } else {
       //sing in logic
@@ -46,6 +54,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
+          Navigate('/browse');
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -63,7 +72,7 @@ const Login = () => {
       <div>
         <img
           className="fixed top-0 left-0 w-full h-full object-cover blur- brightness-34 z-0"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/7d2359a4-434f-4efa-9ff3-e9d38a8bde7f/web/IN-en-20250707-TRIFECTA-perspective_4faa9280-a2c5-4e07-aafc-a45ce43fea09_large.jpg"
+          src={background}
         />
       </div>
       <div className="relative z-10 flex justify-center items-center min-h-screen">
@@ -78,6 +87,7 @@ const Login = () => {
           </h2>
           {!isSignInForm && (
             <input
+              ref={name}
               type="text"
               placeholder="Script starts with your name..."
               className="p-4 m-4 w-full bg-gray-800 text-white rounded-lg"

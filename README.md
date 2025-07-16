@@ -17,3 +17,19 @@
 
 
 
+
+setup vite-react
+configured tailwind
+Header
+Routing of app
+login form
+sign up form
+form validation
+useRef hook
+firebase setup
+Deploy app to production - just to see
+create signUP user account
+implement signin with user api
+create redux store with userslice
+implement signout
+update profile

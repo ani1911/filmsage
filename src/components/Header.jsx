@@ -8,11 +8,14 @@ import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+    const location = useLocation();
+    const isLoginPage = location.pathname === '/';
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {})
@@ -35,7 +38,16 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   return (
-    <div className="fixed top-0 left-0 z-10 w-full px-4 md:px-8 py-3 bg-gradient-to-b from-black/90 via-black/50 to-transparent flex items-center justify-between">
+    <div
+      className={`fixed top-0 left-0 z-10 w-full px-4 md:px-8 py-3
+        flex items-center justify-between
+        ${
+          isLoginPage
+            ? 'bg-gradient-to-b from-black/90 via-black/50 to-transparent'
+            : 'bg-transparent'
+        }
+      `}
+    >
       <img
         className=" lg:ml-16 w-32 sm:w-40 md:w-48 lg:w-56"
         src={logo}

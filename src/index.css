@@ -1,1 +1,64 @@
 @import "tailwindcss";
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+/* Custom CSS for Shimmer and Pulse Animations */
+/* Add this to your main CSS file (e.g., index.css or globals.css) */
+
+/* Keyframes for the Shimmer effect */
+@keyframes shimmer {
+
+    /* Starts the background gradient far to the left */
+    0% {
+        background-position: -1000px 0;
+    }
+
+    /* Moves the background gradient to the right, creating the "sweep" effect */
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Class to apply the Shimmer animation */
+.animate-shimmer {
+    /* Defines the gradient that will move across the element */
+    background: linear-gradient(to right, #4a4a4a 8%, #5a5a5a 18%, #4a4a4a 33%);
+    /* Makes the gradient wider than the element itself, so it can "sweep" across */
+    background-size: 2000px 100%;
+    /* Applies the 'shimmer' keyframe animation:
+     - 1.5s: Duration of one animation cycle.
+     - infinite: Repeats indefinitely.
+     - linear: Constant speed. */
+    animation: shimmer 1.5s infinite linear;
+}
+
+/* Optional: Keyframes for a subtle Pulse animation (used for title placeholders) */
+@keyframes pulse {
+
+    /* Starts and ends at full opacity */
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    /* Fades to 50% opacity in the middle of the animation */
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Class to apply the Pulse animation */
+.animate-pulse {
+    /* Applies the 'pulse' keyframe animation:
+     - 2s: Duration of one animation cycle.
+     - cubic-bezier(...): A smooth easing function.
+     - infinite: Repeats indefinitely. */
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

@@ -1,11 +1,12 @@
-import { useSelector } from "react-redux";
-import useTrailer from "../hooks/useTrailer";
+import { useSelector } from 'react-redux';
+import useTrailer from '../hooks/useTrailer';
 
-
-const VideoBackground = ({movieId}) => {
-
+const VideoBackground = ({ movieId }) => {
   const trailerData = useSelector((store) => store.movies?.trailerVideo);
   useTrailer(movieId);
+  if (!trailerData?.key) {
+    return null;
+  }
   return (
     <div className="w-screen aspect-video hidden md:block">
       <iframe

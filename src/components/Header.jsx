@@ -38,6 +38,10 @@ const Header = () => {
     navigate('/watchlist');
   };
 
+  const handleOnLogoclick = () => {
+    navigate('/browse');
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -69,9 +73,11 @@ const Header = () => {
     >
 
       <img
-        className="lg:ml-16 w-32 sm:w-40 md:w-48 lg:w-56"
+        className="lg:ml-16 w-32 sm:w-40 md:w-48 lg:w-56 cursor-pointer"
         src={logo}
         alt="filmSage logo"
+        onClick={handleOnLogoclick}
+
       />
 
 

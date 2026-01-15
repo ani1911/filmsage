@@ -1,48 +1,67 @@
+# 🎬 FilmSage
 
-#Planning
--Login & sign UP
-    -Sign In \ Sign Up form
-    -redirect to Browser Page
--Browser(after authentification)
-    -Header
-    -Main Movie
-        -Tailor in Background
-        -Title & Description
-        -MovieSuggestions
-            -MovieList
+FilmSage is a React-based movie discovery application that allows users to browse movies, watch trailers, search films, and get **AI-based mood movie recommendations**.  
+The project focuses on **clean React architecture, Redux state management, and real-world API integration**.
 
--NetflixGpt
-    -search bar
-    -Movie Suggestions
+---
+
+## 🚀 Key Features
+
+- Firebase authentication (Sign In / Sign Up)
+- Browse trending and popular movies using TMDB API
+- Featured movie banner with YouTube trailer playback
+- AI-based mood movie recommendation using OpenAI
+- Centralized state management using Redux Toolkit
+- Shimmer UI for loading states
+- Responsive UI built with Tailwind CSS
+
+---
+
+## 🤖 AI Mood-Based Movie Recommendation
+
+Users can describe their mood or the type of movie they want in natural language.
+
+**Example:**
+> “I want a feel-good sci-fi movie with some humor”
+
+The input is processed using OpenAI, which extracts intent (mood, genre, tone), and relevant movies are fetched from TMDB.
+
+---
+
+## 📸 Screenshots
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/880a0f50-6471-4510-a9cc-7edca69af202" width="85%" />
+  <br /><br />
+ <img src="https://github.com/user-attachments/assets/d90987d6-211c-424f-982c-b50daabef34d" width="85%" />
+     <br /><br />
+  <img src="https://github.com/user-attachments/assets/ad3da5a6-c850-4396-94c4-e72741f6b91e" width="85%" />
+  <br /><br />
+  <img src="https://github.com/user-attachments/assets/784d919b-ba07-4fd1-a160-14fa58d6140b" width="85%" />
+</p>
 
 
 
+## 🛠 Tech Stack
 
-setup vite-react
-configured tailwind
-Header
-Routing of app
-login form
-sign up form
-form validation
-useRef hook
-firebase setup
-Deploy app to production - just to see
-create signUP user account
-implement signin with user api
-create redux store with userslice
-implement signout
-update profile
-bugfix - if the user is not logged in redirect /browse to login page and vice-versa
-unsubscribed to the onauthstate changed callback
-constant file creation
-get data from tmbd
-custom hooks for now playing movies
-create movieslice
-update store with movies data
-maincontainer & secondary constainer
-fetch data for trailer video
-update store with trailer video data
-embedded the youtube video adn make it autoplay
+- React
+- Vite
+- Redux Toolkit
+- Firebase Authentication
+- TMDB API
+- OpenAI API
+- Tailwind CSS
+- React Router
+
+---
+
+## ⚛️ React Concepts Used
+
+- Functional components
+- Hooks: `useState`, `useEffect`
+- Redux hooks: `useSelector`, `useDispatch`
+- Conditional rendering
+- Reusable component design
+- Loading and error state handling
 
 

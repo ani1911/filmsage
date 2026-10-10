@@ -5,10 +5,12 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore.jsx";
 
+
+
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+ // <StrictMode>
     <Provider store={appStore}>
     <App />
     </Provider>
-  </StrictMode>
+ // </StrictMode>
 );

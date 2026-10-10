@@ -4,7 +4,7 @@ import { Play } from 'lucide-react';
 import { Info } from 'lucide-react';
 
 const VideoTitle = ({ title}) => {
-  const id = useSelector((store) => store?.movies?.nowPlayingMovies[4].id);
+  const id = useSelector((store) => store?.movies?.nowPlayingMovies[3].id);
   if (!title) return null;
   return (
     <>

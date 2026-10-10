@@ -1,11 +1,11 @@
-# 🎬 FilmSage
+# FilmSage
 
 FilmSage is a React-based movie discovery application that allows users to browse movies, watch trailers, search films, and get **AI-based mood movie recommendations**.  
 The project focuses on **clean React architecture, Redux state management, and real-world API integration**.
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 - Firebase authentication (Sign In / Sign Up)
 - Browse trending and popular movies using TMDB API
@@ -17,7 +17,7 @@ The project focuses on **clean React architecture, Redux state management, and r
 
 ---
 
-## 🤖 AI Mood-Based Movie Recommendation
+## AI Mood-Based Movie Recommendation
 
 Users can describe their mood or the type of movie they want in natural language.
 
@@ -28,7 +28,7 @@ The input is processed using OpenAI, which extracts intent (mood, genre, tone), 
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/880a0f50-6471-4510-a9cc-7edca69af202" width="85%" />
@@ -42,7 +42,7 @@ The input is processed using OpenAI, which extracts intent (mood, genre, tone), 
 
 
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - React
 - Vite
@@ -55,7 +55,7 @@ The input is processed using OpenAI, which extracts intent (mood, genre, tone), 
 
 ---
 
-## ⚛️ React Concepts Used
+## React Concepts Used
 
 - Functional components
 - Hooks: `useState`, `useEffect`
